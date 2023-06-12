@@ -1,0 +1,28 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+mydataframe = pd.read_csv('IMDb movies.csv')
+mydataframe = mydataframe[['title', 'genre', 'director', 'imdb_rating']]
+
+mydataframe['genre'] = mydataframe['genre'].str.split(',')
+mydataframe = mydataframe.explode('genre')
+genrecounts = mydataframe['genre'].value_counts().reset_index()
+genrecounts.columns = ['genre', 'count']
+plt.figure(figsize=(10, 6))
+plt.bar(genrecounts['genre'], genrecounts['count'])
+plt.xlabel('Genre')
+plt.ylabel('Count')
+plt.title('Most popular genre')
+plt.xticks(rotation=90)
+plt.show()
+
+# director
+directorcounts = df['director'].value_counts().reset_index()
+directorcounts.columns = ['director', 'count']
+plt.figure(figsize=(10, 6))
+plt.bar(directorcounts['director'], directorcounts['count'])
+plt.xlabel('Director')
+plt.ylabel('Count')
+plt.title('Director with top rated shows')
+plt.xticks(rotation=90)
+plt.show()
